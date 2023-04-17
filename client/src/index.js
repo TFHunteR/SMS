@@ -6,7 +6,7 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
-import LoginForm from "./pages/loginform";
+import LoginForm from "./pages/Loginform";
 import Navbar from "./compenents/Navbar";
 import "bootstrap/dist/css/bootstrap.min.css";
 import 'bootstrap-icons/font/bootstrap-icons.css';

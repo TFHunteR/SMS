@@ -112,7 +112,7 @@ const Forgot = styled.a`
 
 `
 
-function loginform() {
+function Loginform() {
 
     return (
         <Body>
@@ -140,4 +140,4 @@ function loginform() {
   )
 }
 
-export default loginform;
+export default Loginform;
