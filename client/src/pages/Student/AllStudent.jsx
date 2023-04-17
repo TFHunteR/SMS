@@ -1,55 +1,78 @@
-import React from "react";
-import styled from "styled-components";
+import { TableContainer } from '@mui/material'
+import React from 'react'
+import styled from 'styled-components'
 
 const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 10px
-`;
+    width: 100%;
+    min-width: 500px;
+    height: 700px;
+    border-radius: 10px;
+    box-shadow: 0 0 7px lightgray;
+    background-color:white;
+    padding: 40px;
+    `
+const Title = styled.h1`
+    margin-bottom: 40px;`
 
-const PageHeader = styled.h1`
-  width: 100%;
-  margin: 20px;
-`;
+const SearchContainer = styled.div`
+    display: grid;
+    grid-template-columns: 1fr 1fr 0.5fr;
+    grid-template-rows: 75px;
+    gap: 60px;`
 
-const LinkContainer = styled.ul`
-  width: 100%;
-  display: flex;
-`;
+const InputName = styled.input`
+    background-color: #F0F1F3;
+    border: none;
+    border-radius: 10px;
+    color: gray;
+    padding: 10px;
+    font-size: 1.25rem;
+    `
+const ClassSelection = styled.select`
+    background-color: #F0F1F3;
+    border: none;
+    border-radius: 10px;
+    color: gray;
+    padding: 10px;
+    padding-right: 20px;
+    font-size: 1.25rem;`
 
-const LinkItem = styled.li`
-  list-style-type: none;
-  margin: 0 10px;
-`;
+const SelectionItem = styled.option``
 
-const NLink = styled.a``;
+const ButtonSearch = styled.button`
+    font-size: 1.25rem;
+    color:white;
+    background-color:red;
+    border:none;
+    border-radius: 10px;
+    
+    &:hover {
+        background-color: #D00000;
+    }`
+
+
+
 
 const AllStudent = () => {
   return (
     <Container>
-      <PageHeader>Students</PageHeader>
-
-      <LinkContainer>
-        <LinkItem>
-          <NLink href="#">Home</NLink>
-        </LinkItem>
-        {">"}
-        <LinkItem>
-          <NLink href="#">Students</NLink>
-        </LinkItem>
-      </LinkContainer>
-
-      <div
-        style={{
-          height: "300px",
-          width: "70%",
-          border: "1px solid black",
-        }}
-      ></div>
+        <Title>All Students</Title>
+        <SearchContainer>
+            <InputName placeholder='Search by Name'/>
+            <ClassSelection placeholder='Select Class'>
+                <SelectionItem>Select Class</SelectionItem>
+                <SelectionItem>Foo</SelectionItem>
+                <SelectionItem>Foo</SelectionItem>
+                <SelectionItem>Foo</SelectionItem>
+                <SelectionItem>Foo</SelectionItem>
+            </ClassSelection>
+            <ButtonSearch>Search</ButtonSearch>
+        </SearchContainer>
+        <TableContainer>
+            
+        </TableContainer>
     </Container>
-  );
-};
+  )
+}
 
-export default AllStudent;
+export default AllStudent
