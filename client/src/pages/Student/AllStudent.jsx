@@ -12,6 +12,7 @@ import React, { useState, useCallback, useEffect } from "react";
 import styled from "styled-components";
 import { studentList, studentList2 } from "../../data";
 import "./style.css";
+import ViewProfile from "../../compenents/ViewProfile";
 
 const columnsHead = [
   { id: "id", label: "ID", minWidth: 100 },
@@ -33,7 +34,7 @@ const columnsHead2 = [
   { id: "std_address", label: "Address", minWidth: 100 },
   { id: "std_dob", label: "Date of Birth", minWidth: 100 },
   { id: "std_phone_no", label: "Phone", minWidth: 100 },
-]
+];
 
 const Container = styled.div`
   width: 100%;
@@ -110,10 +111,12 @@ const AllStudent = () => {
   const [classList, setClassList] = useState([]);
   const [page, setPage] = useState(0);
   const [rowPerPage, setRowPerPage] = useState(10);
+  const [open, setOpen] = useState(false);
+  const [selectedStudent, setSelectedStudent] = useState(null);
 
   useEffect(() => {
-    setClassList(data.map(student => student.std_c_name))
-  }, [data])
+    setClassList(studentList2.map((student) => student.std_c_name));
+  }, []);
 
   const handleOnPageChange = useCallback(
     (event, newPage) => {
@@ -127,7 +130,24 @@ const AllStudent = () => {
   };
 
   const handlerSearch = async () => {
-    setData(studentList);
+    if(searchName === '' && className === ''){
+      setData(studentList2);
+    }else if(searchName === '' && className !== ''){
+      setData(studentList2.filter(student => {
+        return className === student.std_c_name
+      }))
+    }else if(searchName !== '' && className === ''){
+      setData(studentList2.filter(student => {
+        return student.std_name.match(`.*${searchName}.*`)
+      }))
+    }else{
+      setData(data.filter(student => {
+        return (studentList2.std_name.match(`.*${searchName}.*`) &&
+          className === student.std_c_name)
+      }))
+    }
+    setSearchName('')
+    setClassName('')
   };
 
   const handlerSearchName = (e) => {
@@ -141,8 +161,16 @@ const AllStudent = () => {
   };
 
   const handlerTableRow = (event, student) => {
-    console.log(student);
+    setSelectedStudent(student);
+    setOpen(true);
   };
+
+  const handlerCloseDialog = () => {
+    setOpen(false);
+    setSelectedStudent(null);
+    console.log('close')
+  };
+
   return (
     <Container>
       <Title>All Students</Title>
@@ -156,11 +184,9 @@ const AllStudent = () => {
           onInput={handleClassName}
         >
           <SelectionItem value={""}>Select Class</SelectionItem>
-          {
-            classList.map(item=> (
-              <SelectionItem value={item}>{item}</SelectionItem>
-            ))
-          }
+          {classList.map((item) => (
+            <SelectionItem value={item}>{item}</SelectionItem>
+          ))}
         </ClassSelection>
         <ButtonSearch onClick={handlerSearch}>Search</ButtonSearch>
       </SearchContainer>
@@ -224,6 +250,12 @@ const AllStudent = () => {
           style={{ display: "flex", alignItems: "center" }}
         />
       </PagerContainer>
+
+      <ViewProfile
+        open={open}
+        onClose={handlerCloseDialog}
+        {...selectedStudent}
+      />
     </Container>
   );
 };
