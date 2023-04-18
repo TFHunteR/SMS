@@ -3,8 +3,7 @@ import "../assets/css/Dashboard.css"
 import Navbar from "../compenents/ReactSideNav.jsx";
 function Dashboard() {
   return (
-    <body>
-      <div className="sidebar"><Navbar/></div>
+    <div>
       <h1>admin</h1>
       <div className="container">
         <div className="item item1">1</div>
@@ -17,7 +16,7 @@ function Dashboard() {
         <div className="item item8">8</div>
         <div className="item item9">9</div>
       </div>
-    </body>
+    </div>
   )
 }
 
