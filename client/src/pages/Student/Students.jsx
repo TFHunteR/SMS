@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import AllStudent from "./AllStudent";
+import { Outlet } from "react-router-dom";
 
 const Container = styled.div`
   display: flex;
@@ -47,8 +48,7 @@ const Students = () => {
           <NLink href="#">Students</NLink>
         </LinkItem>
       </LinkContainer>
-
-      <AllStudent/>
+      <Outlet/>
     </Container>
   );
 };
