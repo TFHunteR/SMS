@@ -35,7 +35,6 @@ const NLink = styled.a``;
 const Students = () => {
   return (
     <>
-    <div className="sidebar"><Sidebar/></div>
     <Container>
       <PageHeader>Students</PageHeader>
 

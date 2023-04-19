@@ -14,15 +14,15 @@ import { Dashboard, Backpack } from "@mui/icons-material";
 import "./SideNavBar.css";
 import styled from "styled-components";
 import MenuOpenIcon from "@mui/icons-material/MenuOpen";
-import MenuIcon from '@mui/icons-material/Menu';
-import PieChartIcon from '@mui/icons-material/PieChart';
+import MenuIcon from "@mui/icons-material/Menu";
+import PieChartIcon from "@mui/icons-material/PieChart";
 
 const SideBarContainer = styled.div`
   width: auto;
   position: relative;
   top: 0;
-  height: inherit;
-  background-color: #2a5b84;
+  height: 100%;
+  background-color: rgb(249, 249, 249, 0.7);
 `;
 
 const SideBarHeader = styled.div`
@@ -37,7 +37,7 @@ const SideBarHeader = styled.div`
 
 const Logo = styled.img`
   height: 100%;
-  display: ${props => props.isColloapsed? 'none':'inline'}
+  display: ${(props) => (props.isColloapsed ? "none" : "inline")};
 `;
 
 const CollapseBtn = styled.button`
@@ -77,18 +77,16 @@ function SideNavbar() {
           top: "0",
           left: "0",
           zIndex: "2",
-          marginTop: "10px",
         }}
       >
         <SideBarHeader>
           <Logo src={CedarLogo} isColloapsed={collapsed} />
           <CollapseBtn onClick={() => collapseSidebar()}>
-            {
-              collapsed? (
-                  <MenuIcon style={{ color: "white" }} />
-              ): <MenuOpenIcon style={{ color: "white" }} />
-            }
-            
+            {collapsed ? (
+              <MenuIcon style={{ color: "white" }} />
+            ) : (
+              <MenuOpenIcon style={{ color: "white" }} />
+            )}
           </CollapseBtn>
         </SideBarHeader>
 
@@ -100,7 +98,12 @@ function SideNavbar() {
         </Menu> */}
 
         <Menu>
-          <MenuItem icon={<Dashboard />}>Dashboard</MenuItem>
+          <MenuItem
+            icon={<Dashboard />}
+            component={<Link to={"/dashboard"} />}
+          >
+            Dashboard
+          </MenuItem>
           <SubMenu label="Students" icon={<Backpack />}>
             <MenuItem component={<Link to="/students/all" />}>
               All Students
@@ -109,13 +112,12 @@ function SideNavbar() {
               Student Promotion
             </MenuItem>
           </SubMenu>
-          <SubMenu label="Charts" icon={<PieChartIcon/>}>
+          <SubMenu label="Charts" icon={<PieChartIcon />}>
             <MenuItem icon={<Backpack />}> Pie charts </MenuItem>
             <MenuItem icon={<Dashboard />}> Line charts </MenuItem>
           </SubMenu>
           <MenuItem> Documentation </MenuItem>
           <MenuItem> Calendar </MenuItem>
-          
         </Menu>
       </Sidebar>
     </SideBarContainer>

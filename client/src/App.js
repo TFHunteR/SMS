@@ -46,52 +46,53 @@ import SharePage from "./pages/SharePage";
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Navigate to={"/dashboard"} />,
-  },
-  {
-    path: "/login",
-    element: <LoginForm></LoginForm>,
-  },
-  {
-    path: "/navbar",
-    element: <Navbar />,
-  },
-  {
-    path: "/sidenavbar",
-    element: <SideNavbar />,
-  },
-  {
-    path: "/reactnav",
-    element: <ReactSideNav />,
-  },
-  {
-    path: "/dashboard",
-    element: <Dashboard />,
-  },
-  {
-    path: "/students",
-    element: <Students />,
+    element: <SharePage />,
     children: [
       {
-        path: "",
-        element: <Navigate to={"/students/all"} />,
+        path: "/dashboard",
+        index: true,
+        element: <Dashboard />,
       },
       {
-        path: "all",
-        index: "true",
-        element: <AllStudent />,
+        path: "/students",
+        element: <Students />,
+        children: [
+          {
+            path: "",
+            element: <Navigate to={"/students/all"} />,
+          },
+          {
+            path: "all",
+            index: "true",
+            element: <AllStudent />,
+          },
+        ],
       },
     ],
   },
+  // {
+  //   path: "/login",
+  //   element: <LoginForm></LoginForm>,
+  // },
+  // {
+  //   path: "/navbar",
+  //   element: <Navbar />,
+  // },
+  // {
+  //   path: "/sidenavbar",
+  //   element: <SideNavbar />,
+  // },
+  // {
+  //   path: "/reactnav",
+  //   element: <ReactSideNav />,
+  // },
 ]);
 function App() {
   return (
     <>
       <ProSidebarProvider>
         <div className="App">
-          <ProSidebarProvider>
-            <RouterProvider router={router} />
-          </ProSidebarProvider>
+          <RouterProvider router={router} />
         </div>
       </ProSidebarProvider>
     </>

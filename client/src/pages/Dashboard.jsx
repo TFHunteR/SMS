@@ -27,8 +27,6 @@ function Dashboard() {
   return (
     <>
       <Container>
-        <SideNavbar />
-
         <div style={{ zIndex: "2" }}>
           <h1>admin</h1>
           <div className="container">
