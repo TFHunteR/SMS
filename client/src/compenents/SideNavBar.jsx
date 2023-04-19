@@ -1,50 +1,125 @@
-import React, {useState, useEffect} from 'react'
-import { Sidebar, Menu, MenuItem, SubMenu } from 'react-pro-sidebar';
+import React, { useState, useEffect } from "react";
+import {
+  Sidebar,
+  Menu,
+  MenuItem,
+  SubMenu,
+  useProSidebar,
+} from "react-pro-sidebar";
 import "bootstrap/dist/css/bootstrap.min.css";
-import 'bootstrap-icons/font/bootstrap-icons.css';
-import { Link } from 'react-router-dom';
+import "bootstrap-icons/font/bootstrap-icons.css";
+import { Link } from "react-router-dom";
 import CedarLogo from "../pictures/cedarhills.png";
-import { Dashboard, Backpack } from '@mui/icons-material';
+import { Dashboard, Backpack } from "@mui/icons-material";
 import "./SideNavBar.css";
+import styled from "styled-components";
+import MenuOpenIcon from "@mui/icons-material/MenuOpen";
+import MenuIcon from '@mui/icons-material/Menu';
+import PieChartIcon from '@mui/icons-material/PieChart';
+
+const SideBarContainer = styled.div`
+  width: auto;
+  position: relative;
+  top: 0;
+  height: inherit;
+  background-color: #2a5b84;
+`;
+
+const SideBarHeader = styled.div`
+  display: flex;
+  height: 100px;
+  margin-bottom: 10px;
+  padding: 20px;
+  align-items: center;
+  justify-content: space-between;
+  background-color: red;
+`;
+
+const Logo = styled.img`
+  height: 100%;
+  display: ${props => props.isColloapsed? 'none':'inline'}
+`;
+
+const CollapseBtn = styled.button`
+  height: 50px;
+  width: 50px;
+  border: none;
+  background-color: transparent;
+`;
+
 function SideNavbar() {
-  const [width, setWidth] = useState("")
-  const[collapse, setCollapsed] = useState(false)
-  function getSize(){
-    setWidth(window.innerWidth)
+  const { collapseSidebar, collapsed } = useProSidebar();
+  const [width, setWidth] = useState("");
+  const [collapse, setCollapsed] = useState(false);
+  function getSize() {
+    setWidth(window.innerWidth);
   }
-  useEffect(()=> {
-    window.addEventListener('resize', getSize);
-    if(width < 400){
-      setCollapsed(true)
-    }else{
-      setCollapsed(false)
+  useEffect(() => {
+    window.addEventListener("resize", getSize);
+    if (width < 400) {
+      setCollapsed(true);
+    } else {
+      setCollapsed(false);
     }
-    return() => {
-      window.removeEventListener('resize',getSize)
-    }
-  }, [width.innerWidth])
+    return () => {
+      window.removeEventListener("resize", getSize);
+    };
+  }, [width.innerWidth]);
+
+  console.log(collapsed);
+
   return (
-    <div >
-        <Sidebar className='sidebar' collapsed={collapse}>
-          <div className='header'>
-            <div className="logo"><img src={CedarLogo}alt="Logo" srcset="" /></div>
-          </div>
-            <Menu>
-              <MenuItem icon={<Dashboard />}>Dashboard</MenuItem>
-              <SubMenu label="Charts">
-                <MenuItem icon={<Backpack  />}> Pie charts </MenuItem>
-                <MenuItem icon={<Dashboard />}> Line charts </MenuItem>
-              </SubMenu>
-              <MenuItem> Documentation </MenuItem>
-              <MenuItem> Calendar </MenuItem>
-              <SubMenu label="Students" icon={<Backpack  />}>
-                <MenuItem component={<Link to="/login" />}>All Students</MenuItem>
-                <MenuItem component={<Link to="/login" />}>Student Promotion</MenuItem>
-              </SubMenu>
-            </Menu>
-        </Sidebar>
-    </div>
-  )
+    <SideBarContainer>
+      <Sidebar
+        className="sidebar"
+        rootStyles={{
+          position: "sticky",
+          top: "0",
+          left: "0",
+          zIndex: "2",
+          marginTop: "10px",
+        }}
+      >
+        <SideBarHeader>
+          <Logo src={CedarLogo} isColloapsed={collapsed} />
+          <CollapseBtn onClick={() => collapseSidebar()}>
+            {
+              collapsed? (
+                  <MenuIcon style={{ color: "white" }} />
+              ): <MenuOpenIcon style={{ color: "white" }} />
+            }
+            
+          </CollapseBtn>
+        </SideBarHeader>
+
+        {/* <Menu>
+          <MenuItem
+            icon={<MenuOpenIcon style={{ color: "white" }}
+             />}
+          > <Logo src={CedarLogo} /></MenuItem>
+        </Menu> */}
+
+        <Menu>
+          <MenuItem icon={<Dashboard />}>Dashboard</MenuItem>
+          <SubMenu label="Students" icon={<Backpack />}>
+            <MenuItem component={<Link to="/students/all" />}>
+              All Students
+            </MenuItem>
+            <MenuItem component={<Link to="/login" />}>
+              Student Promotion
+            </MenuItem>
+          </SubMenu>
+          <SubMenu label="Charts" icon={<PieChartIcon/>}>
+            <MenuItem icon={<Backpack />}> Pie charts </MenuItem>
+            <MenuItem icon={<Dashboard />}> Line charts </MenuItem>
+          </SubMenu>
+          <MenuItem> Documentation </MenuItem>
+          <MenuItem> Calendar </MenuItem>
+          
+        </Menu>
+      </Sidebar>
+    </SideBarContainer>
+  );
 }
 
 export default SideNavbar;

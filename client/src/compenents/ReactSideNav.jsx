@@ -20,7 +20,7 @@ function ReactSideNav() {
             <NavItem eventKey="students">
                 <NavIcon><Backpack/></NavIcon>
                 <NavText>Students</NavText>
-                <NavItem>
+                <NavItem eventKey="all">
                     <NavText>All Students</NavText>
                 </NavItem>
                 <NavItem>

@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import AllStudent from "./AllStudent";
 import { Outlet } from "react-router-dom";
+import Sidebar from "../../compenents/ReactSideNav.jsx";
 
 const Container = styled.div`
   display: flex;
@@ -34,6 +34,8 @@ const NLink = styled.a``;
 
 const Students = () => {
   return (
+    <>
+    <div className="sidebar"><Sidebar/></div>
     <Container>
       <PageHeader>Students</PageHeader>
 
@@ -50,6 +52,7 @@ const Students = () => {
       </LinkContainer>
       <Outlet/>
     </Container>
+    </>
   );
 };
 

@@ -2,10 +2,9 @@
     padding: 0;
     margin: 0;
 }
-body{
-    margin-left: 2.5rem;
-    height: 150vh;
-}
+/* body{
+    height: 100vh;
+} */
 .container{
     
     display: grid;

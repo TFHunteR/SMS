@@ -6,6 +6,7 @@ import Students from "./pages/Student/Students";
 import {
   createBrowserRouter,
   RouterProvider,
+  Navigate,
 } from "react-router-dom";
 import LoginForm from "./pages/Loginform";
 import Navbar from "./compenents/Navbar";
@@ -38,13 +39,14 @@ import Subject from "./pages/Subject.jsx";
 
 //Settings
 import Settings from "./pages/Settings.jsx";
+import SharePage from "./pages/SharePage";
 
 //Taena mo pol gawin mo to bukas ng umaga
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />,
+    element: <Navigate to={"/dashboard"} />,
   },
   {
     path: "/login",
@@ -67,23 +69,32 @@ const router = createBrowserRouter([
     element: <Dashboard />,
   },
   {
-    path:"students",
-    element: <Students/>,
-    children:[
+    path: "/students",
+    element: <Students />,
+    children: [
       {
-        path:"all",
-        element:<AllStudent/>
-      }
-    ]
-  }
+        path: "",
+        element: <Navigate to={"/students/all"} />,
+      },
+      {
+        path: "all",
+        index: "true",
+        element: <AllStudent />,
+      },
+    ],
+  },
 ]);
 function App() {
   return (
-    <div className="App">
+    <>
       <ProSidebarProvider>
-        <RouterProvider router={router} />
+        <div className="App">
+          <ProSidebarProvider>
+            <RouterProvider router={router} />
+          </ProSidebarProvider>
+        </div>
       </ProSidebarProvider>
-    </div>
+    </>
   );
 }
 
