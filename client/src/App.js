@@ -49,6 +49,10 @@ const router = createBrowserRouter([
     element: <SharePage />,
     children: [
       {
+        path: '',
+        element: <Navigate to={'/dashboard'} />
+      },
+      {
         path: "/dashboard",
         index: true,
         element: <Dashboard />,

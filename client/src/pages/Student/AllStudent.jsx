@@ -26,19 +26,18 @@ const columnsHead = [
 ];
 
 const columnsHead2 = [
-  { id: "std_id", label: "ID", minWidth: 50 },
-  { id: "std_name", label: "Name", minWidth: 150 },
+  { id: "std_id", label: "ID", minWidth: 40 },
+  { id: "std_name", label: "Name", minWidth: 75 },
   { id: "std_gender", label: "Gender", minWidth: 75 },
-  { id: "std_c_name", label: "Class", minWidth: 100 },
-  { id: "std_parent_name", label: "Parent", minWidth: 120 },
-  { id: "std_address", label: "Address", minWidth: 100 },
-  { id: "std_dob", label: "Date of Birth", minWidth: 100 },
-  { id: "std_phone_no", label: "Phone", minWidth: 100 },
+  { id: "std_c_name", label: "Class", minWidth: 75 },
+  { id: "std_parent_name", label: "Parent", minWidth: 75 },
+  { id: "std_address", label: "Address", minWidth: 75 },
+  { id: "std_dob", label: "Date of Birth", minWidth: 75 },
+  { id: "std_phone_no", label: "Phone", minWidth: 75 },
 ];
 
 const Container = styled.div`
   width: 100%;
-  min-width: 500px;
   height: 1000px;
   border-radius: 10px;
   box-shadow: 0 0 7px lightgray;

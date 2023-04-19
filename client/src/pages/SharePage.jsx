@@ -8,6 +8,7 @@ import Navbar from "../compenents/Navbar.jsx";
 const Container = styled.div`
   display: flex;
   height: auto;
+  min-width: 1080px;
 `;
 
 const Left = styled.div`
@@ -33,6 +34,7 @@ const NavBarContainer = styled.div`
 const Wrapper = styled.div`
   width: 100%;
   height: auto;
+  background-color: #245B84;
 `;
 
 const SharePage = () => {

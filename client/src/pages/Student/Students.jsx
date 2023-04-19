@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { Outlet } from "react-router-dom";
+
 import Sidebar from "../../compenents/ReactSideNav.jsx";
 
 const Container = styled.div`

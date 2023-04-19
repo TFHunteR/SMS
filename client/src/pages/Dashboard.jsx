@@ -25,7 +25,7 @@ const TestBox = styled.div`
 
 function Dashboard() {
   return (
-    <>
+    
       <Container>
         <div style={{ zIndex: "2" }}>
           <h1>admin</h1>
@@ -42,7 +42,7 @@ function Dashboard() {
           </div>
         </div>
       </Container>
-    </>
+    
   );
 }
 
