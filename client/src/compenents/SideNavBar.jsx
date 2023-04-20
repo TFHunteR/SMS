@@ -19,8 +19,6 @@ import PieChartIcon from "@mui/icons-material/PieChart";
 
 const SideBarContainer = styled.div`
   width: auto;
-  position: relative;
-  top: 0;
   height: 100%;
   background-color: rgb(249, 249, 249, 0.7);
 `;
@@ -75,7 +73,6 @@ function SideNavbar() {
         rootStyles={{
           position: "sticky",
           top: "0",
-          left: "0",
           zIndex: "2",
         }}
       >
