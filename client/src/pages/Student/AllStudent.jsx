@@ -46,6 +46,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  position: relative;
 `;
 const Title = styled.h1`
   width: 100%;
@@ -149,6 +150,12 @@ const AllStudent = () => {
     setClassName('')
   };
 
+  const handlePressEnter = (event) => {
+    if(event.which === 13){
+      handlerSearch()
+    }
+  }
+
   const handlerSearchName = (e) => {
     setSearchName(e.target.value);
     console.log(e.target.value);
@@ -171,9 +178,9 @@ const AllStudent = () => {
   };
 
   return (
-    <Container>
+    <Container onKeyDownCapture={handlePressEnter}>
       <Title>All Students</Title>
-      <SearchContainer>
+      <SearchContainer >
         <InputName
           placeholder="Search by Name"
           onInput={handlerSearchName}
@@ -241,6 +248,7 @@ const AllStudent = () => {
       <PagerContainer>
         <TablePagination
           component="div"
+          rowsPerPageOptions={[10]}
           count={data.length}
           rowsPerPage={rowPerPage}
           page={page}

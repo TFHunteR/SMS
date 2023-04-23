@@ -15,7 +15,7 @@ const Container = styled.div`
 
 const PageHeader = styled.h1`
   width: 100%;
-  maring-bottom: 20px;
+  margin-bottom: 20px;
 `;
 
 const LinkContainer = styled.ul`

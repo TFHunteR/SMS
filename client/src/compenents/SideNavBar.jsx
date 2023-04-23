@@ -16,6 +16,9 @@ import styled from "styled-components";
 import MenuOpenIcon from "@mui/icons-material/MenuOpen";
 import MenuIcon from "@mui/icons-material/Menu";
 import PieChartIcon from "@mui/icons-material/PieChart";
+import LogoutIcon from '@mui/icons-material/Logout';
+import { useStateContext } from "../context/ContextProvider";
+import axiosClient from "../AxiosClient";
 
 const SideBarContainer = styled.div`
   width: auto;
@@ -49,6 +52,8 @@ function SideNavbar() {
   const { collapseSidebar, collapsed } = useProSidebar();
   const [width, setWidth] = useState("");
   const [collapse, setCollapsed] = useState(false);
+  const {setToken, setUser} = useStateContext()
+
   function getSize() {
     setWidth(window.innerWidth);
   }
@@ -65,6 +70,14 @@ function SideNavbar() {
   }, [width.innerWidth]);
 
   console.log(collapsed);
+
+  const onLogout = () => {
+    axiosClient.post('/logout')
+    .then(() => {
+      setUser({})
+      setToken(null)
+    })
+  }
 
   return (
     <SideBarContainer>
@@ -105,6 +118,9 @@ function SideNavbar() {
             <MenuItem component={<Link to="/students/all" />}>
               All Students
             </MenuItem>
+            <MenuItem component={<Link to="/students/add_student" />}>
+              Add Student
+            </MenuItem>
             <MenuItem component={<Link to="/login" />}>
               Student Promotion
             </MenuItem>
@@ -115,6 +131,7 @@ function SideNavbar() {
           </SubMenu>
           <MenuItem> Documentation </MenuItem>
           <MenuItem> Calendar </MenuItem>
+          <MenuItem icon={<LogoutIcon />} onClick={onLogout}> Logout</MenuItem>
         </Menu>
       </Sidebar>
     </SideBarContainer>

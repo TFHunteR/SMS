@@ -1,6 +1,11 @@
 import React from 'react';
 import image1 from "../pictures/cedarhills.png";
 import styled from "styled-components";
+import { useStateContext } from '../context/ContextProvider';
+import { Navigate } from 'react-router-dom';
+import { createRef } from 'react';
+import { useState } from 'react';
+import axiosClient from '../AxiosClient';
 const Container = styled.div`
     padding: 0;
     max-width: 62.5em;
@@ -113,6 +118,35 @@ const Forgot = styled.a`
 `
 
 function Loginform() {
+    const emailRef = createRef()
+    const passwordRef = createRef()
+    const {token , setToken, setUser} = useStateContext();
+    const [errors, setErrors] = useState(null)
+
+    if(token){
+        return <Navigate to={'/'} />
+    }
+
+    const onSubmit = (event) => {
+        event.preventDefault();
+        const payload = {
+            email: emailRef.current.value,
+            password: passwordRef.current.value
+        }
+        console.log(payload)
+        axiosClient.post('/login', payload)
+        .then(({data}) => {
+            setUser(data.user)
+            setToken(data.token)
+        })
+        .catch(err=> {
+            const response = err.response;
+            if (response && response.status === 422){
+                console.log(response.data.errors)
+            }
+        })
+        
+    }
 
     return (
         <Body>
@@ -127,9 +161,9 @@ function Loginform() {
                 </Left>
                 <Right>
                     <LoginBox>
-                        <Form>
-                            <Input placeholder="Enter your Email" />
-                            <Input placeholder="Enter your Password"/>
+                        <Form onSubmit={onSubmit}>
+                            <Input ref={emailRef} placeholder="Enter your Email" />
+                            <Input ref={passwordRef} placeholder="Enter your Password"/>
                             <Button>SIGN IN</Button>
                             <a href="#">Forget/Reset Password?</a>
                         </Form>

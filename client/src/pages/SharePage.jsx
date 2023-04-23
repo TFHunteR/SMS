@@ -1,9 +1,12 @@
 import React from "react";
-import { Outlet } from "react-router-dom";
+import { Outlet, Navigate } from "react-router-dom";
 import SideBar from "../compenents/ReactSideNav.jsx";
 import styled from "styled-components";
 import SideNavbar from "../compenents/SideNavBar.jsx";
 import Navbar from "../compenents/Navbar.jsx";
+import { useStateContext } from "../context/ContextProvider.jsx";
+import { useEffect } from "react";
+import axiosClient from "../AxiosClient.js";
 
 const Container = styled.div`
   display: flex;
@@ -27,17 +30,30 @@ const Right = styled.div`
 
 const NavBarContainer = styled.div`
   width: 100%;
-  height: 100px;
-  background-color: orange;
 `;
 
 const Wrapper = styled.div`
   width: 100%;
+  overflow: scroll;
   height: auto;
   background-color: #245B84;
 `;
 
 const SharePage = () => {
+  const {user, token, setUser} = useStateContext()
+
+    if(!token){
+        return <Navigate to="/login" />
+    }
+
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    useEffect(() => {
+      axiosClient.get('/user')
+      .then(data=> {
+        setUser(data)
+      })
+    }, [setUser])
+
   return (
     <>
       <Container>

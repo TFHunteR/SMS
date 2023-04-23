@@ -40,6 +40,8 @@ import Subject from "./pages/Subject.jsx";
 //Settings
 import Settings from "./pages/Settings.jsx";
 import SharePage from "./pages/SharePage";
+import { ContextProvider } from "./context/ContextProvider";
+import { SignUp } from "./pages/SignUp";
 
 //Taena mo pol gawin mo to bukas ng umaga
 
@@ -49,8 +51,8 @@ const router = createBrowserRouter([
     element: <SharePage />,
     children: [
       {
-        path: '',
-        element: <Navigate to={'/dashboard'} />
+        path: "",
+        element: <Navigate to={"/dashboard"} />,
       },
       {
         path: "/dashboard",
@@ -70,14 +72,22 @@ const router = createBrowserRouter([
             index: "true",
             element: <AllStudent />,
           },
+          {
+            path: "add_student",
+            element: <AddStudent />,
+          },
         ],
       },
     ],
   },
-  // {
-  //   path: "/login",
-  //   element: <LoginForm></LoginForm>,
-  // },
+  {
+    path: "/login",
+    element: <LoginForm></LoginForm>,
+  },
+  {
+    path: "/signup",
+    element: <SignUp />
+  }
   // {
   //   path: "/navbar",
   //   element: <Navbar />,
@@ -96,7 +106,9 @@ function App() {
     <>
       <ProSidebarProvider>
         <div className="App">
-          <RouterProvider router={router} />
+          <ContextProvider>
+            <RouterProvider router={router} />
+          </ContextProvider>
         </div>
       </ProSidebarProvider>
     </>
