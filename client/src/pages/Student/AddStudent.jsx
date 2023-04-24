@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { createRef, useState } from "react";
 import styled from "styled-components";
 import DefaultImg from '../../assets/profile_default.svg'
+import axiosClient from "../../AxiosClient";
 
 const Container = styled.div`
   width: 100%;
@@ -68,9 +69,40 @@ const Button = styled.button`
   margin-right: 20px;`;
 
 function AddStudent() {
+  const firstNameRef = createRef();
+  const lastNameRef = createRef();
+  const genderRef = createRef();
+  const dateOfBirthRef = createRef();
+  const parentsGuardianRef = createRef();
+  const cpNumberRef = createRef();
+  const emailRef = createRef();
+  const passwordRef = createRef();
+  const passwordConfirmationRef = createRef();
+  const classRef = createRef();
+
   const [studentImage, setStudentImage] = useState('')
   const handlerForm = (e) => {
     e.preventDefault();
+    const payload = {
+      std_first_name: firstNameRef.current.value,
+      std_last_name: lastNameRef.current.value,
+      std_gender: genderRef.current.value,
+      std_date_of_birth: dateOfBirthRef.current.value,
+      std_parents_guardian: parentsGuardianRef.current.value,
+      std_cp_number: cpNumberRef.current.value,
+      std_Email: emailRef.current.value,
+      std_Password: passwordRef.current.value,
+      std_Password_confirmation: passwordConfirmationRef.current.value,
+      std_class: classRef.current.value,
+      std_photo:null
+    }
+
+    axiosClient.post('/add_student', payload)
+    .then(data=>{
+      console.log(data)
+    }).catch(err=> {
+      
+    })
   }
 
   const handlerSelectImg = (e) => {
@@ -86,25 +118,27 @@ function AddStudent() {
           <InputItem>
             <Label for="std_FirstN">First Name*:</Label>
             <Input
+              ref={firstNameRef}
               type="text"
               id="std_FirstN"
               name="std_FirstN"
-              required
+              //required
             />
           </InputItem>
           <InputItem>
             <Label for="std_LastN">Last Name*:</Label>
             <Input
+              ref={lastNameRef}
               type="text"
               id="std_LastN"
               name="std_LastN"
-              required
+              //required
             />
           </InputItem>
           <InputRow>
             <InputItem>
               <Label for="std_gender">Gender*:</Label>
-              <Selection id="std_gender" name="std_gender" required>
+              <Selection ref={genderRef} id="std_gender" name="std_gender" required>
                 <Option value={""}>--Select Gender--</Option>
                 <Option value={"male"}>Male</Option>
                 <Option value={"female"}>Female</Option>
@@ -114,60 +148,80 @@ function AddStudent() {
             <InputItem>
               <Label for="std_Date-of-Birth">Date of Birth</Label>
               <Input
+              ref={dateOfBirthRef}
                 type="date"
                 id="std_Date-of-Birth"
                 name="std_Date-of-Birth"
-                required
+                //required
               />
             </InputItem>
           </InputRow>
-
+          <InputItem>
+            <Label for="std_cp_number">
+              Phone Number*:
+            </Label>
+            <Input
+              ref={cpNumberRef}
+              type="number"
+              name="std_cp_number"
+              id="std_cp_number"
+              //required
+            />
+            </InputItem>
           <InputItem>
             <Label for="std_Parents/Guardian">
               Parents/Guardian*:
             </Label>
             <Input
+              ref={parentsGuardianRef}
               type="text"
               name="std_Parents/Guardian"
               id="std_Parents/Guardian"
-              required
+              //required
             />
           </InputItem>
           <InputItem>
             <Label for="std_Email">Email*:</Label>
             <Input
+              ref={emailRef}
               type="email"
               id="std_Email"
               name="std_Email"
-              required
+              //required
             />
           </InputItem>
           <InputItem>
             <Label for="std_Password">Password*:</Label>
             <Input
+              ref={passwordRef}
               type="password"
               id="std_Password"
               name="std_Password"
               minLength={6}
-              required
+              //required
             />
           </InputItem>
           <InputItem>
             <Label for="std_Confirm-Password">Confirm Password*:</Label>
             <Input
+              ref={passwordConfirmationRef}
               type="password"
               id="std_Confirm-Password"
               name="std_Confirm-Password"
-              required
+              //required
             />
           </InputItem>
           <InputItem>
             <Label for="std_c_name">Class*:</Label>
-            <Selection id="std_Class" name="std_Class" required>
+            <Selection 
+            ref={classRef}
+            id="std_Class" name="std_Class"
+             //required
+             >
               <Option value={""}>--Select Class--</Option>
-              <Option value={"I"}>I</Option>
-              <Option value={"II"}>II</Option>
-              <Option value={"III"}>III</Option>
+              <Option value={1}>I</Option>
+              <Option value={2}>II</Option>
+              <Option value={3}>III</Option>
             </Selection>
           </InputItem>
           <StudentImage>

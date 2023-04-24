@@ -42,6 +42,7 @@ import Settings from "./pages/Settings.jsx";
 import SharePage from "./pages/SharePage";
 import { ContextProvider } from "./context/ContextProvider";
 import { SignUp } from "./pages/SignUp";
+import { loadStudents } from "./Loader/StudentLoader";
 
 //Taena mo pol gawin mo to bukas ng umaga
 
@@ -70,6 +71,7 @@ const router = createBrowserRouter([
           {
             path: "all",
             index: "true",
+            loader: loadStudents,
             element: <AllStudent />,
           },
           {

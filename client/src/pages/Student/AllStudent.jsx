@@ -13,6 +13,7 @@ import styled from "styled-components";
 import { studentList, studentList2 } from "../../data";
 import "./style.css";
 import ViewProfile from "../../compenents/ViewProfile";
+import { useLoaderData } from "react-router-dom";
 
 const columnsHead = [
   { id: "id", label: "ID", minWidth: 100 },
@@ -29,11 +30,11 @@ const columnsHead2 = [
   { id: "std_id", label: "ID", minWidth: 40 },
   { id: "std_name", label: "Name", minWidth: 75 },
   { id: "std_gender", label: "Gender", minWidth: 75 },
-  { id: "std_c_name", label: "Class", minWidth: 75 },
-  { id: "std_parent_name", label: "Parent", minWidth: 75 },
+  { id: "std_class", label: "Class", minWidth: 75 },
+  { id: "std_parents_guardian", label: "Parent", minWidth: 75 },
   { id: "std_address", label: "Address", minWidth: 75 },
-  { id: "std_dob", label: "Date of Birth", minWidth: 75 },
-  { id: "std_phone_no", label: "Phone", minWidth: 75 },
+  { id: "std_date_of_birth", label: "Date of Birth", minWidth: 75 },
+  { id: "std_cp_number", label: "Phone", minWidth: 75 },
 ];
 
 const Container = styled.div`
@@ -105,7 +106,7 @@ const StudentTabRow = styled.tr``;
 
 const AllStudent = () => {
   const column = columnsHead2;
-  const [data, setData] = useState(studentList2);
+  const [data, setData] = useState([]);
   const [searchName, setSearchName] = useState("");
   const [className, setClassName] = useState("");
   const [classList, setClassList] = useState([]);
@@ -113,8 +114,10 @@ const AllStudent = () => {
   const [rowPerPage, setRowPerPage] = useState(10);
   const [open, setOpen] = useState(false);
   const [selectedStudent, setSelectedStudent] = useState(null);
+  const {students, pageLinks} = useLoaderData();
 
   useEffect(() => {
+    setData(students)
     setClassList(studentList2.map((student) => student.std_c_name));
   }, []);
 

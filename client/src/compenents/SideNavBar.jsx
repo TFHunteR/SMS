@@ -88,6 +88,7 @@ function SideNavbar() {
           top: "0",
           zIndex: "2",
         }}
+        defaultCollapsed
       >
         <SideBarHeader>
           <Logo src={CedarLogo} isColloapsed={collapsed} />
