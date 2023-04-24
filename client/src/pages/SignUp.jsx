@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import { useStateContext } from '../context/ContextProvider'
 import { useState } from 'react'
 import axiosClient from '../AxiosClient'
+import { Navigate } from 'react-router-dom'
 
 const Container = styled.div`
     width: 100vw;
@@ -11,7 +12,7 @@ const Container = styled.div`
     display: flex;
     align-items:center;
     justify-content:center;
-    background-color: #F0F1F3;
+    background-color: rgb(254, 250, 225);
 `
 
 const SignUpContainer = styled.div`
@@ -19,6 +20,23 @@ const SignUpContainer = styled.div`
     height: 70vh;
     background-color: white;
 `
+const Title = styled.h1``
+const InputContainer = styled.div`
+    padding: 20px;
+    display:flex;
+    flex-direction:column;
+    gap: 20px;`
+const Input = styled.input`
+    padding: 10px;
+    font-size: 20px;
+    border-radius: 5px;`
+const Button = styled.button`
+    padding: 10px;
+    font-size: 20px;
+    border: none;
+    margin-top: 20px;
+`
+
 export const SignUp = () => {
     const nameRef = createRef()
     const emailRef = createRef()
@@ -26,6 +44,10 @@ export const SignUp = () => {
     const passwordConfirmationRef = createRef()
     const {token , setToken, setUser} = useStateContext();
     const [errors, setErrors] = useState(null)
+
+    if(token){
+        return <Navigate to={'/'} />
+    }
 
     const onSubmit = (event) => {
         event.preventDefault();
@@ -53,11 +75,16 @@ export const SignUp = () => {
     <Container>
         <SignUpContainer>
             <form onSubmit={onSubmit}>
-                <input ref={nameRef} type="text" id='name' name='name' placeholder='Full Name' />
-                <input ref={emailRef} type="text" id='email' name='email' placeholder='Email Address' />
-                <input ref={passwordRef} type="password" id="password" name="password" placeholder='Password' />
-                <input ref={passwordConfirmationRef} type="password" id="repeatPassword" name="repeatPassword" placeholder='Repeat Password' />
-                <button>Sign Up</button>
+                
+                <InputContainer>
+                <Title>Add Admin</Title>
+                <Input ref={nameRef} type="text" id='name' name='name' placeholder='Full Name' />
+                <Input ref={emailRef} type="text" id='email' name='email' placeholder='Email Address' />
+                <Input ref={passwordRef} type="password" id="password" name="password" placeholder='Password' />
+                <Input ref={passwordConfirmationRef} type="password" id="repeatPassword" name="repeatPassword" placeholder='Repeat Password' />
+                <Button>Sign Up</Button>
+                </InputContainer>
+                
             </form>
         </SignUpContainer>
     </Container>
