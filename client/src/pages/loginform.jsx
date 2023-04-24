@@ -163,7 +163,7 @@ function Loginform() {
                     <LoginBox>
                         <Form onSubmit={onSubmit}>
                             <Input ref={emailRef} placeholder="Enter your Email" />
-                            <Input ref={passwordRef} placeholder="Enter your Password"/>
+                            <Input ref={passwordRef} type='password' placeholder="Enter your Password"/>
                             <Button>SIGN IN</Button>
                             <a href="#">Forget/Reset Password?</a>
                         </Form>
