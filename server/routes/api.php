@@ -20,6 +20,7 @@ Route::middleware('auth:sanctum')->group(function () {
         return $request->user();
     });
     Route::post('/logout', [AuthController::class, 'logout']);
+    Route::post('/add_student', [StudentController::class, 'store']);
 });
 
 Route::get('/students', [StudentController::class, 'index']);
@@ -27,7 +28,7 @@ Route::get('/my_msg', function () {
     return 'hello';
 });
 
-Route::post('/add_student', [StudentController::class, 'store']);
+
 Route::post('/post_test', function () {return response(["message" => "Foo"], 201);});
 Route::apiResource('/test', StudentController::class);
 Route::post('/signup', [AuthController::class, 'signup']);

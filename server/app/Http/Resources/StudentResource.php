@@ -15,12 +15,14 @@ class StudentResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'std_ID' => $this->std_ID,
-            'std_Name' => $this->std_Name,
-            'std_Email' => $this->std_Email,
-            'std_Date-of-Birth' => $this->std_date_of_birth,
-            'std_Parents/Guardian' => $this->std_parents_guardian,
-            'std_CP-Number' => $this->std_cp_number
+            'std_id' => $this->std_ID,
+            'std_name' => $this->std_Name,
+            'std_email' => $this->std_Email,
+            'std_date_of_birth' => $this->std_date_of_birth,
+            'std_parents_guardian' => $this->std_parents_guardian,
+            'std_cp_number' => $this->std_cp_number,
+            'std_gender' => $this->std_Gender,
+            'std_class' => $this->class_Id
         ];
     }
 }

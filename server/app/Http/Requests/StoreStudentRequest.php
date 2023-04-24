@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rules\Enum;
 use Illuminate\Validation\Rules\Password;
 
 class StoreStudentRequest extends FormRequest
@@ -24,13 +25,18 @@ class StoreStudentRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'std_Name' => 'required|string',
-            // 'std_Email' => ['required', 'email', 'unique:users,email'],
-            // 'std_Password' => ['required', 
-            // Password::min(6)],
-            // 'std_Date-of-Birth' => ['required'],
-            // 'std_cp_number' => ['required'],
-            // 'std_parents_Guardian' => ['required']
+            'std_first_name' => 'required|string',
+            'std_last_name' => 'required|string',
+            'std_gender' => ['required','in:male, female'],
+            'std_date_of_birth' => ['required', 'date'],
+            'std_parents_guardian' => ['required', 'string'],
+            'std_cp_number' => ['required', 'numeric'],
+            'std_Email' => 'required|email|unique:students,std_Email',
+            'std_Password' => ['required', 'confirmed',
+            Password::min(6)
+            ->letters()],
+            'std_class' => ['required', 'numeric'],
+            'std_photo' => ['image', 'nullable']
         ];
     }
 }

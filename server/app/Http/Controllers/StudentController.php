@@ -27,24 +27,24 @@ class StudentController extends Controller
      */
     public function store(StoreStudentRequest $request)
     {
-        $data = $request->validate();
+        $data = $request->validated();
         /** @var \App\Models\Student $student */
-        // $student = Student::create([
-        //     'std_Name' => $data['std_Name'],
-        //     'std_Gender' => $data['std_Gender'],
-        //     'std_Email' => $data['std_Email'],
-        //     'std_Password' => bcrypt($data['std_Password']),
-        //     'std_Photo' => $data['std_Photo'],
-        //     'std_date_of_birth' => $data['std_date_of_birth'],
-        //     'std_parents_guardian' => $data['std_parents_guardian'],
-        //     'std_cp_number' => $data['std_cp_number'],
-        //     'tchr_Id' => $data['tchr_Id'],
-        //     'class_Id' => $data['class_Id'],
-        //     'school_Id' => $data['school_Id']
+        $student = Student::create([
+            'std_Name' => ($data['std_first_name'].' '.$data['std_last_name']),
+            'std_Gender' => $data['std_gender'],
+            'std_date_of_birth' => $data['std_date_of_birth'],
+            'std_parents_guardian' => $data['std_parents_guardian'],
+            'std_Email' => $data['std_Email'],
+            'std_Password' => bcrypt($data['std_Password']),
+            'std_Photo' => $data['std_photo'],
+            'std_cp_number' => $data['std_cp_number'],
+            'tchr_Id' => 1,
+            'class_Id' => $data['std_class'],
+            'school_Id' => 1
 
-        // ]);
+        ]);
 
-        return response($data, 201) ;
+        return response(new StudentResource($student), 201) ;
         
     }
 
